@@ -1,0 +1,11 @@
+*.asv
+*.dll
+*.asv
+cache/*.mat
+*~
+formulae/*
+.DS_Store
+*.o
+*.mexmaci64
+*.mexa64
+.vscode
