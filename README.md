@@ -81,7 +81,9 @@ We have included scripts for generating (MATLAB versions of) figures that appear
     ```
     for a sufficiently large value of `n`.
 
-The following two scripts display comparisons to previous work. These require a patched version of the code released with [Ray et al. 2016]. To avoid any possible copyright issues, we are not including this code in this public release. Please contact the authors if you need it.
+The following three scripts display comparisons to previous work. These require a patched version of the code released with [Ray et al. 2016]. To avoid any possible copyright issues, we are not including this code in this public release. Please contact the authors if you need it.
+
+- `ProjectionComparison` generates figures like Figure 4 in the paper.
 
 - `ConvergenceComparisons` generates figures like Figures 5 and 6 in the paper:
   ```matlab
