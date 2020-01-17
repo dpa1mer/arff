@@ -9,3 +9,6 @@ formulae/*
 *.mexmaci64
 *.mexa64
 .vscode
+/src/batchop/batchop_cpu.mexw64
+/src/sdp/MultiSdp.mexw64
+/src/sdp/MultiSdp.mexw64.pdb

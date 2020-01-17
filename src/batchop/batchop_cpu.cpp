@@ -6,6 +6,8 @@
 #include "matrix.h"
 #include "blas.h"
 #include "lapacke.h"
+#undef min
+#include <algorithm>
 
 static char const * const errInputId = "batchop_cpu:InvalidInput";
 
@@ -50,10 +52,10 @@ void doMult(mxArray * plhs[],
         double * C_k = &C_ptr[m * n * k];
         if (n == 1) { // Vector rhs
             // cblas_dgemv(CblasColMajor, CblasNoTrans, m, r, 1, A_k, m, B_k, 1, 0, C_k, 1);
-            dgemv_(transpA.c_str(), &dimA0, &dimA1, &one, A_k, &dimA0, B_k, &inc, &zero, C_k, &inc);
+            dgemv(transpA.c_str(), &dimA0, &dimA1, &one, A_k, &dimA0, B_k, &inc, &zero, C_k, &inc);
         } else { // Matrix rhs
             // cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, m, n, r, 1, A_k, m, B_k, r, 0, C_k, m);
-            dgemm_(transpA.c_str(), transpB.c_str(), &m, &n, &r1, &one, A_k, &dimA0, B_k, &dimB0, &zero, C_k, &m);
+            dgemm(transpA.c_str(), transpB.c_str(), &m, &n, &r1, &one, A_k, &dimA0, B_k, &dimB0, &zero, C_k, &m);
         }
     }, ap);
 
@@ -90,9 +92,9 @@ void doTrisolve(mxArray * plhs[],
         // Copy B_k to X_k. This will be overwritten during computation.
         LAPACKE_dlacpy(LAPACK_COL_MAJOR, 0, m, n, B_k, m, X_k, m);
         if (n == 1) { // Vector rhs
-            dtrsv_(uplo.c_str(), "N", "N", &m, A_k, &m, X_k, &inc);
+            dtrsv(uplo.c_str(), "N", "N", &m, A_k, &m, X_k, &inc);
         } else { // Matrix rhs
-            dtrsm_("L", uplo.c_str(), "N", "N", &m, &n, &one, A_k, &m, X_k, &m);
+            dtrsm("L", uplo.c_str(), "N", "N", &m, &n, &one, A_k, &m, X_k, &m);
         }
     });
 
@@ -183,8 +185,8 @@ void doCholCong(mxArray * plhs[],
 
         // Copy B_k to X_k. This will be overwritten during computation.
         LAPACKE_dlacpy(LAPACK_COL_MAJOR, 0, m, m, B_k, m, X_k, m);
-        dtrsm_("L", "L", "N", "N", &m, &m, &one, L_k, &m, X_k, &m);
-        dtrsm_("R", "L", "T", "N", &m, &m, &one, L_k, &m, X_k, &m);
+        dtrsm("L", "L", "N", "N", &m, &m, &one, L_k, &m, X_k, &m);
+        dtrsm("R", "L", "T", "N", &m, &m, &one, L_k, &m, X_k, &m);
     });
 
     plhs[0] = X;
@@ -219,7 +221,7 @@ void doQR(mxArray * plhs[], const mxArray * A, const size_t * dimA, size_t nPage
     LAPACKE_dgeqp3_work(LAPACK_COL_MAJOR, m, n, nullptr, m, nullptr, nullptr, &query, -1);
     size_t work_size = static_cast<size_t>(query);
     LAPACKE_dorgqr_work(LAPACK_COL_MAJOR, m, r, r, nullptr, m, nullptr, &query, -1);
-    work_size = std::max(work_size, static_cast<size_t>(query));
+    work_size = max(work_size, static_cast<size_t>(query));
     tbb::enumerable_thread_specific< std::vector<double, tbb::cache_aligned_allocator<double> > > thread_work(work_size);
     
     tbb::parallel_for(0, static_cast<int>(nPages), 1, [&](int k){

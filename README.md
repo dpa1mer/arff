@@ -19,9 +19,9 @@ First, remember to build and install the Mosek Fusion API as described
 The following commands will compile all MEX files and add the code to the MATLAB path.
 ```matlab
 cd src/batchop
-mexbuild /path/to/tbb/include
+mexbuild /path/to/tbb/include /path/to/tbb/libs
 cd ../sdp
-mexbuild /path/to/tbb/include /path/to/mosek/9.0
+mexbuild /path/to/tbb/include /path/to/mosek/9.0 /path/to/tbb/libs
 cd ../..
 install
 ```
