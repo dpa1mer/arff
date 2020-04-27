@@ -3,7 +3,7 @@
 ## Introduction
 This code includes algorithms for computing volumetric (octahedral and odeco) frame fields, described in detail in our paper:
 
-> Palmer, D., Bommes, D., & Solomon, J. (2019). Algebraic Representations for Volumetric Frame Fields. *arXiv preprint* [arXiv:1908.05411](https://arxiv.org/abs/1908.05411).
+> Palmer, D., Bommes, D., & Solomon, J. (2020). Algebraic Representations for Volumetric Frame Fields. ACM Transactions on Graphics (TOG), 39(2), 1-17.
 
 ## External Dependencies
 - [Manopt](https://www.manopt.org) 5.0
