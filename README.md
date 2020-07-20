@@ -3,7 +3,7 @@
 ## Introduction
 This code includes algorithms for computing volumetric (octahedral and odeco) frame fields, described in detail in our paper:
 
-> Palmer, D., Bommes, D., & Solomon, J. (2020). Algebraic Representations for Volumetric Frame Fields. ACM Transactions on Graphics (TOG), 39(2), 1-17.
+> Palmer, D., Bommes, D., & Solomon, J. (2020). [Algebraic Representations for Volumetric Frame Fields.](https://dl.acm.org/doi/pdf/10.1145/3366786) ACM Transactions on Graphics (TOG), 39(2), 1-17.
 
 [![View ARFF on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75297-arff)
 
