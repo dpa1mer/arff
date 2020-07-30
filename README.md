@@ -7,6 +7,8 @@ This code includes algorithms for computing volumetric (octahedral and odeco) fr
 
 [![View ARFF on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75297-arff)
 
+[![DOI](https://zenodo.org/badge/208910749.svg)](https://zenodo.org/badge/latestdoi/208910749)
+
 ## External Dependencies
 - [Manopt](https://www.manopt.org) 5.0
 - [Mosek](https://www.mosek.com) 9.0 ([C++ Fusion API](https://docs.mosek.com/9.0/cxxfusion/index.html#))
